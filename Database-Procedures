@@ -1,0 +1,193 @@
+create or replace NONEDITIONABLE PROCEDURE ADMING
+
+( x1 IN number, x2 IN nvarchar2 ,x3 IN  varchar2, F1 out SYS_REFCURSOR )  AS 
+BEGIN
+OPEN F1 FOR SELECT ID, SIFRE FROM KULLANICILAR_TABLOSU where ID = X1 AND SIFRE = X2 AND KULLANICI_TURU=X3;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE ARAMA_EXIST
+(x1 IN NVARCHAR2,F1 out SYS_REFCURSOR)
+AS
+BEGIN
+
+OPEN F1 FOR SELECT * FROM depo_tablosu WHERE ID=X1 OR AD=X1;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE CALISAN_CHECK
+(X1 IN NVARCHAR2,F1 out SYS_REFCURSOR)
+AS
+BEGIN
+OPEN F1 FOR SELECT ID,AD,SOYAD,KULLANICI_TURU,EMAIL,TELEFON_NO,GOREV FROM kullanıcı_bılgılerı WHERE SORUMLU_ID=X1;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE ELEMAN_EKLE
+
+( x1 IN varchar2, x2 IN number ,x3 IN  nvarchar2 ,x4 IN nvarchar2 ,x5 IN nvarchar2 ,
+x6 IN nvarchar2 ,x7 IN nvarchar2 ,x8 IN number ,x9 IN nvarchar2 ,x10 IN number ,
+x11 IN nvarchar2 ,x12 IN number ,x13 IN nvarchar2 )  AS 
+BEGIN
+INSERT INTO KULLANICI_BILGILERI(ID,AD,SOYAD,KULLANICI_TURU,DOGUM_TARIHI,EMAIL,TELEFON_NO,GOREV,
+SIFRE,MAAS,CALISAN_IBAN,SORUMLU_ID,CALISMAYA_BASLADIGI_TARIH,CALISTIGI_YIL,CALISAN_NOTU)
+VALUES (x2,x4,x5,x1,x6,x7,x12,x11,x3,x8,x9,x10,SYSDATE,0,x13);
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE ELEMAN_EXIST
+(X IN number,F1 out SYS_REFCURSOR)
+AS
+BEGIN
+
+OPEN F1 FOR SELECT * FROM kullanıcı_bılgılerı WHERE ID=X;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE ELEMAN_GUNCELLE
+
+( x1 IN varchar2, x2 IN number ,x3 IN  nvarchar2 ,x4 IN nvarchar2 ,x5 IN nvarchar2 ,
+x6 IN nvarchar2 ,x7 IN nvarchar2 ,x8 IN number ,x9 IN nvarchar2 ,x10 IN number ,
+x11 IN nvarchar2 ,x12 IN number ,x13 IN nvarchar2 )  AS 
+BEGIN
+UPDATE KULLANICI_BILGILERI SET AD=x4,SOYAD=x5,KULLANICI_TURU=x1,DOGUM_TARIHI=x6,EMAIL=x7,TELEFON_NO=x12,GOREV=x11,
+SIFRE=x3,MAAS=x8,CALISAN_IBAN=x9,SORUMLU_ID=x10,CALISAN_NOTU=x13 WHERE ID=x2;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE ELEMAN_SIL
+(X IN INTEGER)
+AS
+BEGIN
+DELETE FROM KULLANICI_BILGILERI WHERE ID=X;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE GERI_AL
+
+(x1 IN NVARCHAR2 )  AS 
+BEGIN
+UPDATE faturalar SET odendı_bılgısı='Ödenmedi',odendıgı_saat=null,odendıgı_tarıh=null WHERE saat=X1 ;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE GRID_ICIN
+
+(F1 out SYS_REFCURSOR) AS
+BEGIN
+OPEN F1 FOR SELECT * FROM KULLANICI_BILGILERI;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE KULLANICI_ID_FIND
+
+(X IN INTEGER ,F1 out SYS_REFCURSOR) AS
+BEGIN
+OPEN F1 FOR SELECT * FROM KULLANICI_BILGILERI WHERE ID=X;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE KURUM_FATURA_EKLE
+
+(x1 IN NVARCHAR2, x2 IN NVARCHAR2 ,x3 IN  NVARCHAR2 ,x4 IN NUMBER)  AS 
+BEGIN
+
+INSERT INTO kurum_faturaları(ABONE_NO,KURUM_ADI,FATURA_IBAN,TUTAR,ODENDI_BILGISI,ODENDIGI_TARIH,ODENDIGI_SAAT,GECICI)
+VALUES (x1,x2,x3,x4,null,TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'),SYSDATE,TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'));
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE KURUM_GERI_AL
+
+(x1 IN NVARCHAR2 )  AS 
+BEGIN
+UPDATE kurum_faturaları SET odendı_bılgısı='Ödenmedi',odendıgı_saat=null,odendıgı_tarıh=null WHERE GECICI=X1 ;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE KURUM_ODENDI_YAP
+
+(x1 IN NVARCHAR2)  AS 
+BEGIN
+
+UPDATE kurum_faturaları SET odendı_bılgısı='Ödendi',odendıgı_saat=TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'),odendıgı_tarıh=SYSDATE WHERE GECICI=X1 ;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE NOT_EKLE
+
+(x1 IN NVARCHAR2, x2 IN NVARCHAR2 )  AS 
+BEGIN
+
+UPDATE kullanıcı_bılgılerı SET calısan_notu=x2 WHERE ID=x1 ;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE ODENDI_YAP
+
+(x1 IN NVARCHAR2)  AS 
+BEGIN
+UPDATE faturalar SET odendı_bılgısı='Ödendi',odendıgı_saat=TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'),odendıgı_tarıh=SYSDATE WHERE saat=X1 ;
+
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE URUN_AL
+
+(x1 IN NVARCHAR2, x2 IN NVARCHAR2 ,x3 IN  NVARCHAR2 ,x4 IN NVARCHAR2 ,x5 IN NVARCHAR2 ,x6 IN NVARCHAR2 ,x7 IN NVARCHAR2 ,
+x8 IN NUMBER ,x9 IN NUMBER ,x10 IN NVARCHAR2 ,x11 IN NUMBER ,x12 IN NVARCHAR2 ,x13 IN NVARCHAR2 ,F1 out SYS_REFCURSOR)  AS 
+BEGIN
+IF x13='ILISKI' THEN
+OPEN F1 FOR SELECT * FROM ılıskıler_tablosu WHERE ıban=x7 AND tel_no=x6;
+
+ELSIF x13='ILISKI_EKLE' THEN
+INSERT INTO ılıskıler_tablosu(ILISKI_TURU,AD,SOYAD,IBAN,TEL_NO)
+VALUES ('Toptancı',x4,x5,x7,x6);
+
+ELSIF x13='ILISKI_EKLE_M' THEN
+INSERT INTO ılıskıler_tablosu(ILISKI_TURU,AD,SOYAD,IBAN,TEL_NO)
+VALUES ('Müşteri',x4,x5,x7,x6);
+
+ELSIF x13='EKLE' THEN 
+INSERT INTO urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU)
+VALUES (x1,x2,x3);
+INSERT INTO depo_tablosu(ID,AD,TURU,MIKTAR,MIKTAR_TURU)
+VALUES (x1,x2,x3,x9,x10);
+INSERT INTO alınan_urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU,TOPTANCI_ADI,TOPTANCI_SOYADI,TOPTANCI_TEL,TOPTANCI_IBAN,BIRIM_FIYAT,MIKTAR,MIKTAR_TURU,TOPLAM_FIYAT,ISLEMI_YAPAN_ID,TARIH,SAAT)
+VALUES (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,SYSDATE,TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'));
+
+ELSIF x13='UZERINE_EKLE' THEN
+UPDATE depo_tablosu SET MIKTAR=x9+MIKTAR WHERE ID=x1 AND AD=x2;
+
+INSERT INTO alınan_urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU,TOPTANCI_ADI,TOPTANCI_SOYADI,TOPTANCI_TEL,TOPTANCI_IBAN,BIRIM_FIYAT,MIKTAR,MIKTAR_TURU,TOPLAM_FIYAT,ISLEMI_YAPAN_ID,TARIH,SAAT)
+VALUES (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,SYSDATE,TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'));
+
+ELSIF x13='SAT' THEN
+UPDATE depo_tablosu SET MIKTAR=MIKTAR-x9 WHERE ID=x1 AND AD=x2;
+
+INSERT INTO satılan_urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU,MUSTERI_ADI,MUSTERI_SOYADI,MUSTERI_TEL,MUSTERI_IBAN,BIRIM_FIYAT,MIKTAR,MIKTAR_TURU,TOPLAM_FIYAT,ISLEMI_YAPAN_ID,TARIH,SAAT)
+VALUES (x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,SYSDATE,TO_CHAR(SYSTIMESTAMP,'HH24:MI:SS.FF2'));
+
+END IF;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE URUN_EKLE
+
+(x1 IN NVARCHAR2, x2 IN NVARCHAR2 ,x3 IN  NVARCHAR2 ,x4 IN NUMBER ,x5 IN NVARCHAR2,x6 IN NVARCHAR2)  AS 
+BEGIN
+IF x6='EKLE' THEN 
+INSERT INTO urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU)
+VALUES (x1,x2,x3);
+INSERT INTO depo_tablosu(ID,AD,TURU,MIKTAR,MIKTAR_TURU)
+VALUES (x1,x2,x3,x4,x5);
+INSERT INTO uretılen_urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU,MIKTAR,MIKTAR_TURU)
+VALUES (x1,x2,x3,x4,x5);
+ELSIF x6='UZERINE_EKLE' THEN
+UPDATE depo_tablosu SET MIKTAR=x4+MIKTAR WHERE ID=x1 AND AD=x2;
+INSERT INTO uretılen_urun_tablosu(URUN_ID,URUN_ADI,URUN_TURU,MIKTAR,MIKTAR_TURU)
+VALUES (x1,x2,x3,x4,x5);
+END IF;
+END;
+***********************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE PROCEDURE URUN_EXIST
+(X1 IN NVARCHAR2,X2 IN NVARCHAR2,X3 IN NVARCHAR2,F1 out SYS_REFCURSOR)
+AS
+BEGIN
+IF X3='UPDATEABLE' THEN
+OPEN F1 FOR SELECT * FROM urun_tablosu WHERE URUN_ID=X1 AND URUN_ADI=X2;
+ELSIF X3='NONINSERTABLE' THEN
+OPEN F1 FOR SELECT * FROM urun_tablosu WHERE URUN_ID=X1 OR URUN_ADI=X2;
+END IF;
+END;
