@@ -1,0 +1,16 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TriggerOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.TriggerOraclev10g" name="K_B_AKTARAN_TO_KT" directorySegmentName="seg_0" id="978E2968-BE89-DA97-A886-BBFD65470080">
+<sourceConnName>Otomasyon</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>K_B_AKTARAN_TO_KT</sourceObjName>
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:41 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+<actions>INSERT</actions>
+<body><![CDATA[BEGIN 
+    INSERT INTO kullanıcılar_tablosu(ID,SIFRE,KULLANICI_TURU) VALUES(:new.ID,:new.SIFRE,:new.KULLANICI_TURU); 
+END;]]></body>
+<triggerTime>AFTER</triggerTime>
+<owner>97530A5A-A201-3A3C-EE8F-C1CFA5222484</owner>
+<table>89AC8360-7CA0-934E-CBEC-D1A5B7A07B35</table>
+</TriggerOraclev10g>

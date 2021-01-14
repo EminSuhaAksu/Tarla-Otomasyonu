@@ -1,0 +1,65 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="ILISKILER_TABLOSU" directorySegmentName="seg_0" id="81536E12-B866-6402-D58E-A5637D7CB912">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:37 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+<schemaObject>B46829C7-F25D-4832-8013-B86BD6FB4454</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>73885F35-B3D9-C77A-B4A6-7051BD878502</segment>
+<tableSpace>A0A975AA-5075-48AE-15CA-13A1EE4ED8F7</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ILISKI_TURU" id="171A247A-5EA5-F7A4-FD99-22D4956AFE57">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:38 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="IBAN" id="28B201FD-2F79-2C58-BA7F-DD1631C25E37">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:38 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="AD" id="4E4EA0AE-6FC0-B1E3-7973-971A8032F37F">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:38 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TEL_NO" id="A7FAB4EB-7E65-53C8-222C-C621B979BBC6">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:38 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="SOYAD" id="EAA42888-8ECF-B662-D863-C5BB2FC72D9A">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:38 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<indexProxies>
+<IndexProxy class="oracle.dbtools.crest.model.design.storage.oracle.v10g.IndexProxyOraclev10g" name="ILISKILER_TABLOSU_PK" id="C6913E90-9D83-CE91-520A-7BB4A923A067">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:38 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+<schemaObject>B46829C7-F25D-4832-8013-B86BD6FB4454</schemaObject>
+<segment>09918405-7102-1ADB-0F42-3F159E04FA12</segment>
+<tableSpace>A0A975AA-5075-48AE-15CA-13A1EE4ED8F7</tableSpace>
+</IndexProxy>
+</indexProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="ILISKILER_TABLOSU_PK" id="5D9E3111-0101-3DD1-BD5F-05F6478C3D72">
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:39 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+<segment>09918405-7102-1ADB-0F42-3F159E04FA12</segment>
+<tableSpace>A0A975AA-5075-48AE-15CA-13A1EE4ED8F7</tableSpace>
+<existingIndex>C6913E90-9D83-CE91-520A-7BB4A923A067</existingIndex>
+<indexSegment>09918405-7102-1ADB-0F42-3F159E04FA12</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

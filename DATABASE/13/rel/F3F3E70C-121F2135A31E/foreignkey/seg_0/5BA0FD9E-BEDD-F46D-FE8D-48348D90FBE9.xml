@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="5BA0FD9E-BEDD-F46D-FE8D-48348D90FBE9" containerWithKeyObject="E08D491B-25C1-1022-4316-C7B6DE4D2749" localFKIndex="EB1CA2E1-3C2F-98C0-444D-4D5E50C9F5F7" name="ID_SIFRE_KULLANICI_TURU_FK">
+<sourceConnName>Otomasyon</sourceConnName>
+<sourceObjSchema>SYSTEM</sourceObjSchema>
+<sourceObjName>ID_SIFRE_KULLANICI_TURU_FK</sourceObjName>
+<createdBy>PC</createdBy>
+<createdTime>2020-12-27 13:05:41 UTC</createdTime>
+<ownerDesignName>13</ownerDesignName>
+<referredTableLongName>SYSTEM.KULLANICI_BILGILERI</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>89AC8360-7CA0-934E-CBEC-D1A5B7A07B35</referredTableID>
+<keyObject>F6178D77-1870-A709-A219-01A23D1A0AC6</keyObject>
+<referredKeyID>F6178D77-1870-A709-A219-01A23D1A0AC6</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID,SIFRE,KULLANICI_TURU</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
