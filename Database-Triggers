@@ -1,0 +1,29 @@
+create or replace NONEDITIONABLE TRIGGER A_U_AKTARAN_TO_F
+    AFTER INSERT ON ALINAN_URUN_TABLOSU
+    FOR EACH ROW 
+BEGIN 
+    INSERT INTO FATURALAR(URUN_ID,URUN_ADI,URUN_TURU,MIKTAR,MIKTAR_TURU,KISI_ADI,KISI_SOYADI,IBAN,TEL_NO,TARIH,SAAT,ODENDI_BILGISI) VALUES(:new.URUN_ID,:new.URUN_ADI,:new.URUN_TURU,
+    :new.MIKTAR,:new.MIKTAR_TURU,:new.TOPTANCI_ADI,:new.TOPTANCI_SOYADI,:new.TOPTANCI_IBAN,:new.TOPTANCI_TEL,:new.TARIH,:new.SAAT,'Ödenmedi'); 
+END;
+**************************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE TRIGGER ELEMAN_SIL_KT
+    BEFORE DELETE ON KULLANICI_BILGILERI
+    FOR EACH ROW 
+BEGIN 
+    DELETE FROM  kullanıcılar_tablosu WHERE ID=:old.ID;
+END;
+**************************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE TRIGGER K_B_AKTARAN_TO_KT
+    AFTER INSERT ON KULLANICI_BILGILERI
+    FOR EACH ROW 
+BEGIN 
+    INSERT INTO kullanıcılar_tablosu(ID,SIFRE,KULLANICI_TURU) VALUES(:new.ID,:new.SIFRE,:new.KULLANICI_TURU); 
+END;
+**************************************************************************************************************************************************************************************
+create or replace NONEDITIONABLE TRIGGER S_U_AKTARAN_TO_F
+    AFTER INSERT ON SATILAN_URUN_TABLOSU
+    FOR EACH ROW 
+BEGIN 
+    INSERT INTO FATURALAR(URUN_ID,URUN_ADI,URUN_TURU,MIKTAR,MIKTAR_TURU,KISI_ADI,KISI_SOYADI,IBAN,TEL_NO,TARIH,SAAT,ODENDI_BILGISI) VALUES(:new.URUN_ID,:new.URUN_ADI,:new.URUN_TURU,
+    :new.MIKTAR,:new.MIKTAR_TURU,:new.MUSTERI_ADI,:new.MUSTERI_SOYADI,:new.MUSTERI_IBAN,:new.MUSTERI_TEL,:new.TARIH,:new.SAAT,'Ödenmedi'); 
+END;
